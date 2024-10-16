@@ -1,0 +1,27 @@
+# node_modules 폴더 무시
+node_modules/
+
+# 환경 변수 파일 무시 (백엔드와 프론트엔드 모두)
+backend/.env
+frontend/.env
+
+# 로그 파일 무시
+*.log
+
+# 빌드 폴더 무시 (프론트엔드 빌드 결과물)
+frontend/build/
+
+# 시스템 파일 무시
+.DS_Store
+Thumbs.db
+
+# IDE 및 에디터 설정 파일 무시
+.vscode/
+*.code-workspace
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# npm 또는 yarn에서 생성되는 package-lock 파일 무시 (선택 사항)
+package-lock.json
+# yarn.lock
