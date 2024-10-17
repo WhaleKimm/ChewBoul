@@ -1,8 +1,13 @@
-// Function to upload a video
-function uploadVideo() {
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('You need to log in to upload a video.');
+        return;
+    }
+
     const videoInput = document.getElementById('videoInput');
     const file = videoInput.files[0];
-
     if (!file) {
         alert('Please select a video file to upload.');
         return;
@@ -11,41 +16,31 @@ function uploadVideo() {
     const formData = new FormData();
     formData.append('video', file);
 
-    fetch('http://localhost:5000/upload', {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('uploadStatus').textContent = data.message;
-            loadVideos(); // Reload videos to show the newly uploaded one
-        })
-        .catch(error => {
-            console.error('Error uploading video:', error);
+    try {
+        const response = await fetch('http://localhost:5000/upload', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData,
         });
-}
+        const data = await response.json();
+        document.getElementById('uploadStatus').textContent = data.message;
+    } catch (error) {
+        console.error('Error uploading video:', error);
+    }
+});
 
-// Function to load videos and display them in the gallery
-function loadVideos() {
-    fetch('http://localhost:5000/videos')
-        .then(response => response.json())
-        .then(data => {
-            const gallery = document.getElementById('videoGallery');
-            gallery.innerHTML = '';
+// 네비게이터 바 버튼 이벤트 리스너 추가
+document.getElementById('homeBtn').addEventListener('click', () => {
+    window.location.href = '/';
+});
 
-            data.videos.forEach(video => {
-                const videoElement = document.createElement('video');
-                videoElement.src = `http://localhost:5000/${video}`;
-                videoElement.controls = true;
-                videoElement.classList.add('rounded-lg', 'shadow-lg', 'w-full', 'transition-all', 'hover:shadow-2xl');
-                gallery.appendChild(videoElement);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading videos:', error);
-        });
-}
+document.getElementById('feedBtn').addEventListener('click', () => {
+    window.location.href = '/feed';
+});
 
-
-// Load videos when the page is loaded
-document.addEventListener('DOMContentLoaded', loadVideos);
+document.getElementById('profileBtn').addEventListener('click', () => {
+    // 사용자 프로필 페이지로 이동하도록 구현 필요
+    window.location.href = '/profile';
+});
