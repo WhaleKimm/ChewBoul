@@ -7,6 +7,7 @@ function Navbar() {
       <div className="flex justify-around">
         <Link to="/" className="text-blue-600 text-lg font-semibold">Home</Link>
         <Link to="/feed" className="text-blue-600 text-lg font-semibold">Feed</Link>
+        <Link to="/upload" className="text-blue-600 text-lg font-semibold">Upload</Link>
         <Link to="/profile" className="text-blue-600 text-lg font-semibold">My Profile</Link>
       </div>
     </nav>
