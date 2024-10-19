@@ -1,7 +1,8 @@
+// models/Video.js
 const mongoose = require('mongoose');
 
 const videoSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   filePath: { type: String, required: true },
   likes: { type: Number, default: 0 },
   comments: [{ body: String, date: Date }],

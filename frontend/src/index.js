@@ -1,14 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client'; // 변경된 부분
 import App from './App';
-import './index.css'; // 필요에 따라 스타일을 추가
+import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// createRoot 사용
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const uploadForm = document.getElementById('uploadForm');

@@ -1,5 +1,7 @@
 // server.js
 const express = require('express');
+const path = require('path');
+
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const videoRoutes = require('./routes/videos');
@@ -17,7 +19,8 @@ app.use(cors({
 // Routes
 app.use('/auth', authRoutes);
 app.use('/videos', videoRoutes);
-
+// uploads 폴더를 정적 파일로 제공
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
